@@ -16,12 +16,12 @@ def costFunction(y_pred, y):
         cost += (y_pred[j]-y[j])**2
     return (1/2/len(y))*cost
 #load model and scaler
-modelname = 'nnmodelFP_v1.1'
+modelname = '../../Model/nnmodelFP_predPavg'
 nn_model = joblib.load(modelname)
-scalername = 'FindPscaler'
+scalername = '../../Model/FindPscaler'
 scaler = joblib.load(scalername)
 #%% load test data
-fname = 'test_file.csv'
+fname = '../../Data/test_file.csv'
 print('Loading data ...\n')
 X = []
 y = []

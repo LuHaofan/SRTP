@@ -11,13 +11,13 @@ import matplotlib.pyplot as plt
 import numpy as np
 
 #%%load model and scaler
-modelname = 'nnmodel4f_v1.2'
+modelname = '../../Model/nnmodel4f_predKavg'
 nn_model = joblib.load(modelname)
-scalername = '4fscaler'
+scalername = '../../Model/4fscaler'
 scaler = joblib.load(scalername)
-pmodelname = 'nnmodelFP_v1.1'
+pmodelname = '../../Model/nnmodelFP_predPavg'
 p_model = joblib.load(pmodelname)
-pscalername = 'FindPscaler'
+pscalername = '../../Model/FindPscaler'
 p_scaler = joblib.load(pscalername)
 
 
@@ -29,7 +29,7 @@ def costFunction(y_pred, y):
     return (1/2/len(y))*cost
 
 #%% predict p value
-fname = 'test_file.csv'
+fname = '../../Data/test_file.csv'
 print('Loading data ...\n')
 kx = []
 ky = []
