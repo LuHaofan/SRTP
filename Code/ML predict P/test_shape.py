@@ -10,14 +10,15 @@ import numpy as np
 import csv
 
 #%%load model and scaler
-modelname = 'nnmodel4f_v1.0'
+modelname = '../../Model/nnmodel4f_predK'
 nn_model = joblib.load(modelname)
-scalername = '4fscaler'
+scalername = '../../Model/4fscaler'
 scaler = joblib.load(scalername)
-pmodelname = 'nnmodelFP_v1.1'
+pmodelname = '../../Model/nnmodelFP_predPavg'
 p_model = joblib.load(pmodelname)
-pscalername = 'FindPscaler'
+pscalername = '../../Model/FindPscaler'
 p_scaler = joblib.load(pscalername)
+
 
 #%% Test Cone
 f = 0.046181411
