@@ -1,6 +1,8 @@
 # SRTP
 This is the data/code repository of Our SRTP project
 ## Model specification
+---
+Using neural network to predict the shape factor p and conductivity
 * nnmodelFP_v3: predict the value of p
 	param: 
 	V -- volume of the particle
@@ -20,5 +22,11 @@ This is the data/code repository of Our SRTP project
 * 4fscaler: standardize the parameters. The param specification is the same as the nnmodel4f_predK
 
 ## Plot specification
+* Include the data plot and error plot
+* The basic setting diagram: the shape of neural network and Finite Element model
 
 ## Data specification
+* Include the test file and results.
+
+## Document specification
+* Include the midterm report, final report and starting report

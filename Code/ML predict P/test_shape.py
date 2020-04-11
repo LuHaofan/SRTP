@@ -40,7 +40,7 @@ for i in range(10):
     pavg.append(predp[0])
 p = sum(pavg)/10
 
-#p = h/r
+#p = 2*h/r
 Kp = [0.2, 0.5, 1, 2, 5, 10, 20]
 Km = Kp
 filename = 'cone_param_pro.csv'
