@@ -15,9 +15,9 @@ modelname = '../../Model/nnmodel4f_predKavg'
 nn_model = joblib.load(modelname)
 scalername = '../../Model/4fscaler'
 scaler = joblib.load(scalername)
-pmodelname = '../../Model/nnmodelFP_predPavg'
+pmodelname = '../../Model/nnmodelFP_v3'
 p_model = joblib.load(pmodelname)
-pscalername = '../../Model/FindPscaler'
+pscalername = '../../Model/FindPscaler_v3'
 p_scaler = joblib.load(pscalername)
 
 
@@ -29,7 +29,8 @@ def costFunction(y_pred, y):
     return (1/2/len(y))*cost
 
 #%% predict p value
-fname = '../../Data/test_file.csv'
+fname = '../../../code/EllipsoidTrain/test_file_p.csv'
+n_samples = 100
 print('Loading data ...\n')
 kx = []
 ky = []
@@ -40,9 +41,9 @@ with open(fname) as csvfile:
     header = next(csv_reader)
     for row in csv_reader:
         kx.append(row[0:3])
-        ky.append(row[7])
-        X.append(row[3:6])
-        y.append(row[6])
+        ky.append(row[10])
+        X.append(row[3:9])
+        y.append(row[9])
         
 kx = np.array([[float(i) for i in row] for row in kx])
 ky = np.array([float(j) for j in ky])
@@ -90,6 +91,11 @@ for i in range(5):
     print(X[Test_error.index(temp[i])])
     print('\n')
 
+cost_arr = []
+for i in range(0, n_samples, 100):
+    cost_arr.append(costFunction(pred[i:i+100], Test_y[i:i+100]))
+print(cost_arr)
+
 print('\tidx \tpred_y \tTest_y \terror')
 for i in range(100):
     print('\t{} \t{} \t{} \t{} '.format(i+2, pred[i], Test_y[i], Test_error[i]))
@@ -98,13 +104,19 @@ print('Average Cost:')
 print(costFunction(pred, Test_y))
 
 plt.figure()
-plt.plot(np.linspace(1,100,100), Test_error)
-plt.title('NN test error plot')
+plt.plot(np.linspace(1,n_samples,n_samples), Test_error)
+plt.title('NN test error plot (f = 0.7890)')
 plt.xlabel('Index of test samples')
 plt.ylabel('relative error %')
 plt.show()
 
-
-
+'''
+#%% Plot error vs volume fraction
+plt.figure()
+plt.plot(np.linspace(0.1, 0.9, 9), cost_arr)
+plt.title("ML prediction error vs the volume fraction")
+plt.xlabel('Volume fraction')
+plt.ylabel('Every error')
+'''
 
 
