@@ -16,12 +16,12 @@ def costFunction(y_pred, y):
         cost += (y_pred[j]-y[j])**2
     return (1/2/len(y))*cost
 #load model and scaler
-modelname = '../../Model/nnmodelFP_predPavg'
+modelname = '../../Model/nnmodelFP_v4'
 nn_model = joblib.load(modelname)
-scalername = '../../Model/FindPscaler'
+scalername = '../../Model/FindPscaler_v4'
 scaler = joblib.load(scalername)
 #%% load test data
-fname = '../../Data/test_file.csv'
+fname = '../../Data/P_testset_refined.csv'
 print('Loading data ...\n')
 X = []
 y = []
@@ -39,13 +39,16 @@ y = [float(j) for j in y]
 Test_X = np.array(X[:])
 Test_y = np.array(y[:])
 Test_X = scaler.transform(Test_X)
+'''
 avg = []
 for m in range(10):
     pred_y = nn_model[m].predict(Test_X)
     avg.append(list(pred_y))
+    
 avg = np.array(avg)
 pred = np.mean(avg,0)
-
+'''
+pred = nn_model.predict(Test_X)
 Test_error = []
 for i in range(len(Test_y)):
     Test_error.append(100*abs(pred[i]-Test_y[i])/Test_y[i])

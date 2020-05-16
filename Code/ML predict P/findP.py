@@ -10,7 +10,7 @@ import numpy as np
 from sklearn.externals import joblib
 import csv
 import random
-fname = '../../../code/EllipsoidTrain/P_trainset.csv'
+fname = 'C:/Users/Lu Haofan/Documents/SRTP_Repo/SRTP/Data/P_trainset_refined.csv'
 print('Loading data ...\n')
 X = []
 y = []
@@ -18,8 +18,8 @@ with open(fname) as csvfile:
     csv_reader = csv.reader(csvfile)
     header = next(csv_reader)
     for row in csv_reader:
-        X.append(row[3:9])
-        y.append(row[9])
+        X.append(row[3:6])
+        y.append(row[6])
         
 X = [[float(i) for i in row] for row in X]
 y = [float(j) for j in y]
@@ -33,6 +33,7 @@ Training_X = scaler.transform(Training_X)
 
 #%% train model
 print('Training model...')
+
 model = []
 for i in range(10):
     print('Training Model {}'.format(i))
@@ -46,5 +47,5 @@ est = MLPRegressor(hidden_layer_sizes=(10,25,25,25,10), alpha = 0, activation='r
 est.fit(Training_X, Training_y)
 '''
 #%% Save the model and scaler
-joblib.dump(scaler, 'FindPscaler_v2')
-joblib.dump(model, filename='nnmodelFP_v2')
+joblib.dump(scaler, 'FindPscaler_v5')
+joblib.dump(model, filename='nnmodelFP_v5')
