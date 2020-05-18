@@ -10,7 +10,7 @@ import numpy as np
 from sklearn.externals import joblib
 import csv
 import random
-fname = 'C:/Users/Lu Haofan/Documents/SRTP_Repo/SRTP/Data/P_trainset_refined.csv'
+fname = 'C:/Users/lhf/Documents/SRTP_Repo/SRTP/Data/P_trainset_pro.csv'
 print('Loading data ...\n')
 X = []
 y = []
@@ -18,8 +18,8 @@ with open(fname) as csvfile:
     csv_reader = csv.reader(csvfile)
     header = next(csv_reader)
     for row in csv_reader:
-        X.append(row[3:6])
-        y.append(row[6])
+        X.append(row[3:9])
+        y.append(row[9])
         
 X = [[float(i) for i in row] for row in X]
 y = [float(j) for j in y]
@@ -43,9 +43,9 @@ for i in range(10):
     model.append(est)
 '''
 est = MLPRegressor(hidden_layer_sizes=(10,25,25,25,10), alpha = 0, activation='relu', verbose = True,
-                   learning_rate_init = 0.001, random_state = random.seed(0), max_iter = 1000)
+                   learning_rate_init = 0.001, random_state = random.seed(0), max_iter = 10000)
 est.fit(Training_X, Training_y)
 '''
 #%% Save the model and scaler
-joblib.dump(scaler, 'FindPscaler_v5')
-joblib.dump(model, filename='nnmodelFP_v5')
+joblib.dump(scaler, r'C:\Users\lhf\Documents\SRTP_Repo\SRTP\Model\FindPscaler_v7')
+joblib.dump(model, filename= r'C:\Users\lhf\Documents\SRTP_Repo\SRTP\Model\nnmodelFP_v7')

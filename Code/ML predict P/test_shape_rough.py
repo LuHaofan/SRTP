@@ -14,10 +14,7 @@ modelname = '../../Model/nnmodel4f_predK'
 nn_model = joblib.load(modelname)
 scalername = '../../Model/4fscaler'
 scaler = joblib.load(scalername)
-pmodelname = '../../Model/nnmodelFP_v7'
-p_model = joblib.load(pmodelname)
-pscalername = '../../Model/FindPscaler_v7'
-p_scaler = joblib.load(pscalername)
+
 
 
 #%% Test Cone
@@ -29,22 +26,11 @@ l = np.sqrt(h**2+r**2)
 S = np.pi*r**2+np.pi*r*l
 V = (1/3)*r**2*np.pi*h
 f = V
-AvgR = (3*V/4/np.pi)**(1/3)
-Pro_1 = h*r
-Pro_2 = h*r
-Pro_3 = r**2*np.pi
 
-p_var = p_scaler.transform([[V, S, Pro_1, Pro_2, Pro_3, AvgR]])
-pavg = []
-for i in range(10):
-    predp = p_model[i].predict(p_var)
-    pavg.append(predp[0])
-p = sum(pavg)/10
-
-#p = 2*h/r
+p = 2*h/r
 Kp = [0.2, 0.5, 1, 2, 5, 10, 20]
 Km = Kp
-filename = 'cone_param_pro2.csv'
+filename = 'cone_param_old1.csv'
 with open(filename, 'w', newline='') as file: 
     f_csv = csv.writer(file)
     rows = []
@@ -57,26 +43,16 @@ with open(filename, 'w', newline='') as file:
     f_csv.writerows(rows)
 
 #%% Test Ellipsoid
-a = 0.2
+a = 0.40
 b = 0.2
-c = 0.4
+c = 0.2
 V = (4/3)*np.pi*a*b*c
 f = V
-AvgR = (3*V/4/np.pi)**(1/3)
-Pro_1 = np.pi*b*c
-Pro_2 = np.pi*b*a
-Pro_3 = np.pi*a*c
-S = 4*np.pi*((a**1.6*b**1.6+a**1.6*c**1.6+b**1.6*c**1.6)/3)**(1/1.6)
-p_var = p_scaler.transform([[V, S, Pro_1, Pro_2, Pro_3, AvgR]])
-pavg = []
-for i in range(10):
-    predp = p_model[i].predict(p_var)
-    pavg.append(predp[0])
-p = sum(pavg)/10
+p = c/a
 
 Kp = [0.2, 0.5, 1, 2, 5, 10, 20]
 Km = Kp
-filename = 'ellipsoid_param_pro2.csv'
+filename = 'ellipsoid_param_old1.csv'
 with open(filename, 'w', newline='') as file: 
     f_csv = csv.writer(file)
     rows = []
@@ -95,21 +71,11 @@ r = 0.15
 V = 2*np.pi**2*R*r**2
 S = 4*np.pi**2*R*r
 f = V
-Pro_1 = 2*(R+r)*2*r
-Pro_2 = 2*(R+r)*2*r
-Pro_3 = (R+r)**2*np.pi - (R-r)**2*np.pi
-AvgR = (3*V/4/np.pi)**(1/3)
-p_var = p_scaler.transform([[V, S, Pro_1, Pro_2, Pro_3, AvgR]])
-pavg = []
-for i in range(10):
-    predp = p_model[i].predict(p_var)
-    pavg.append(predp[0])
-p = sum(pavg)/10
 
-#p = R/r
+p = R/r
 Kp = [0.2, 0.5, 1, 2, 5, 10, 20]
 Km = Kp
-filename = 'donut_param_pro2.csv'
+filename = 'donut_param_old1.csv'
 with open(filename, 'w', newline='') as file: 
     f_csv = csv.writer(file)
     rows = []

@@ -15,9 +15,9 @@ modelname = '../../Model/nnmodel4f_predKavg'
 nn_model = joblib.load(modelname)
 scalername = '../../Model/4fscaler'
 scaler = joblib.load(scalername)
-pmodelname = '../../Model/nnmodelFP_v3'
+pmodelname = '../../Model/nnmodelFP_v6'
 p_model = joblib.load(pmodelname)
-pscalername = '../../Model/FindPscaler_v3'
+pscalername = '../../Model/FindPscaler_v6'
 p_scaler = joblib.load(pscalername)
 
 
