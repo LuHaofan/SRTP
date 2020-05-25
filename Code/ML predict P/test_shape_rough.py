@@ -19,8 +19,8 @@ scaler = joblib.load(scalername)
 
 #%% Test Cone
 
-h = 0.4
-r = 0.2
+h = 0.49
+r = 0.3
 
 l = np.sqrt(h**2+r**2)
 S = np.pi*r**2+np.pi*r*l
@@ -30,7 +30,7 @@ f = V
 p = 2*h/r
 Kp = [0.2, 0.5, 1, 2, 5, 10, 20]
 Km = Kp
-filename = 'cone_param_old1.csv'
+filename = 'cone_param_old4.csv'
 with open(filename, 'w', newline='') as file: 
     f_csv = csv.writer(file)
     rows = []
@@ -43,16 +43,16 @@ with open(filename, 'w', newline='') as file:
     f_csv.writerows(rows)
 
 #%% Test Ellipsoid
-a = 0.40
-b = 0.2
-c = 0.2
+a = 0.1877
+b = 0.1877
+c = 0.3129
 V = (4/3)*np.pi*a*b*c
 f = V
 p = c/a
 
 Kp = [0.2, 0.5, 1, 2, 5, 10, 20]
 Km = Kp
-filename = 'ellipsoid_param_old1.csv'
+filename = 'ellipsoid_param_old4.csv'
 with open(filename, 'w', newline='') as file: 
     f_csv = csv.writer(file)
     rows = []
@@ -66,8 +66,8 @@ with open(filename, 'w', newline='') as file:
 #%% Test Cube
     
 #%% Test Donut
-R = 0.25
-r = 0.15
+R = 0.1866
+r = 0.112
 V = 2*np.pi**2*R*r**2
 S = 4*np.pi**2*R*r
 f = V
@@ -75,7 +75,7 @@ f = V
 p = R/r
 Kp = [0.2, 0.5, 1, 2, 5, 10, 20]
 Km = Kp
-filename = 'donut_param_old1.csv'
+filename = 'donut_param_old4.csv'
 with open(filename, 'w', newline='') as file: 
     f_csv = csv.writer(file)
     rows = []
