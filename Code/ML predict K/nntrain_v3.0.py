@@ -12,7 +12,7 @@ import csv
 import random
 from sklearn.externals import joblib
 
-fname = 'randEllipsoid_4f_0~100.csv'
+fname = r'C:\Users\lhf\Documents\SRTP_Repo\SRTP\Data\K_trainset_pro.csv'
 print('Loading data ...\n')
 X = []
 y = []
@@ -42,5 +42,5 @@ for i in range(10):
     est.fit(Training_X, Training_y)
     model.append(est)
 # save the model and scaler
-joblib.dump(scaler, '4fscaler')
-joblib.dump(model, filename='nnmodel4f_v1.2')
+joblib.dump(scaler, 'FindK4fscaler')
+joblib.dump(model, filename='FindKnnmodel4f_v1')

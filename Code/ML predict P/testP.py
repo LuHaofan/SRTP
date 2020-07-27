@@ -69,7 +69,8 @@ for i in range(100):
 print('\n')
 print('Average Cost:')
 print(costFunction(pred, Test_y))
-
+print('Mean error:{}'.format(np.mean(Test_error)))
+print('Standard deviation Error:{}'.format(np.std(Test_error)))
 plt.figure()
 plt.plot(np.linspace(1,100,100), Test_error)
 plt.title('NN test error plot')

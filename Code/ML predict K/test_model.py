@@ -4,9 +4,9 @@ import matplotlib.pyplot as plt
 import numpy as np
 
 #%%load model and scaler
-modelname = 'nnmodel4f_v1.0'
+modelname = '../../Model/FindKnnmodel4f_v1'
 nn_model = joblib.load(modelname)
-scalername = '4fscaler'
+scalername = '../../Model/FindK4fscaler'
 scaler = joblib.load(scalername)
 
 #%%define the funciton to compute the error
@@ -17,7 +17,7 @@ def costFunction(y_pred, y):
     return (1/2/len(y))*cost
 
 #%%load the test data
-fname = 'randEllipsoid_4f_test.csv'
+fname = '../../Data/randEllipsoid_4f_test.csv'
 X = []
 y = []
 with open(fname) as csvfile:
@@ -30,6 +30,7 @@ with open(fname) as csvfile:
 X = [[float(i) for i in row] for row in X]
 y = [float(j) for j in y]
 
+    
 #%% Test Ellipsoid
 a = 0.49
 b = 0.3

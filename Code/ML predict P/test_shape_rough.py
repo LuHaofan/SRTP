@@ -10,9 +10,9 @@ import numpy as np
 import csv
 
 #%%load model and scaler
-modelname = '../../Model/nnmodel4f_predK'
+modelname = '../../Model/FindKnnmodel4f_v1'
 nn_model = joblib.load(modelname)
-scalername = '../../Model/4fscaler'
+scalername = '../../Model/FindK4fscaler'
 scaler = joblib.load(scalername)
 
 
@@ -30,7 +30,7 @@ f = V
 p = 2*h/r
 Kp = [0.2, 0.5, 1, 2, 5, 10, 20]
 Km = Kp
-filename = 'cone_param_old4.csv'
+filename = 'cone_param_old5.csv'
 with open(filename, 'w', newline='') as file: 
     f_csv = csv.writer(file)
     rows = []
@@ -38,8 +38,10 @@ with open(filename, 'w', newline='') as file:
         for i in range(len(Kp)):
             sample = np.array([[Kp[i], Km[j], f, p]])
             sample = scaler.transform(sample)
-            pred = nn_model.predict(sample)
-            rows.append((Kp[i], Km[j],f, p, pred[0]))
+            pred = []
+            for k in range(len(nn_model)):
+                pred.append(nn_model[k].predict(sample))
+            rows.append((Kp[i], Km[j],f, p, np.mean(pred)))
     f_csv.writerows(rows)
 
 #%% Test Ellipsoid
@@ -52,7 +54,7 @@ p = c/a
 
 Kp = [0.2, 0.5, 1, 2, 5, 10, 20]
 Km = Kp
-filename = 'ellipsoid_param_old4.csv'
+filename = 'ellipsoid_param_old5.csv'
 with open(filename, 'w', newline='') as file: 
     f_csv = csv.writer(file)
     rows = []
@@ -60,11 +62,34 @@ with open(filename, 'w', newline='') as file:
         for i in range(len(Kp)):
             sample = np.array([[Kp[i], Km[j], f, p]])
             sample = scaler.transform(sample)
-            pred = nn_model.predict(sample)
-            rows.append((Kp[i], Km[j],f, p, pred[0]))
+            pred = []
+            for k in range(len(nn_model)):
+                pred.append(nn_model[k].predict(sample))
+            rows.append((Kp[i], Km[j],f, p, np.mean(pred)))
     f_csv.writerows(rows)
-#%% Test Cube
-    
+#%% Test helix
+n_turns = 3
+R = 0.1574
+r = 0.07
+pitch = 0.15
+V = np.sqrt((2*R*np.pi)**2+pitch**2)*n_turns*(r**2*np.pi)
+f = V
+p = (2*r+n_turns*pitch)/2/R
+Kp = [0.2, 0.5, 1, 2, 5, 10, 20]
+Km = Kp
+filename = 'helix_param_old5.csv'
+with open(filename, 'w', newline='') as file: 
+    f_csv = csv.writer(file)
+    rows = []
+    for j in range(len(Km)):
+        for i in range(len(Kp)):
+            sample = np.array([[Kp[i], Km[j], f, p]])
+            sample = scaler.transform(sample)
+            pred = []
+            for k in range(len(nn_model)):
+                pred.append(nn_model[k].predict(sample))
+            rows.append((Kp[i], Km[j],f, p, np.mean(pred)))
+    f_csv.writerows(rows)
 #%% Test Donut
 R = 0.1866
 r = 0.112
@@ -75,7 +100,7 @@ f = V
 p = R/r
 Kp = [0.2, 0.5, 1, 2, 5, 10, 20]
 Km = Kp
-filename = 'donut_param_old4.csv'
+filename = 'donut_param_old5.csv'
 with open(filename, 'w', newline='') as file: 
     f_csv = csv.writer(file)
     rows = []
@@ -83,6 +108,8 @@ with open(filename, 'w', newline='') as file:
         for i in range(len(Kp)):
             sample = np.array([[Kp[i], Km[j], f, p]])
             sample = scaler.transform(sample)
-            pred = nn_model.predict(sample)
-            rows.append((Kp[i], Km[j],f, p, pred[0]))
+            pred = []
+            for k in range(len(nn_model)):
+                pred.append(nn_model[k].predict(sample))
+            rows.append((Kp[i], Km[j],f, p, np.mean(pred)))
     f_csv.writerows(rows)

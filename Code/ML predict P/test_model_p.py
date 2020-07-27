@@ -15,9 +15,9 @@ modelname = '../../Model/nnmodel4f_predKavg'
 nn_model = joblib.load(modelname)
 scalername = '../../Model/4fscaler'
 scaler = joblib.load(scalername)
-pmodelname = '../../Model/nnmodelFP_v6'
+pmodelname = '../../Model/nnmodelFP_v7'
 p_model = joblib.load(pmodelname)
-pscalername = '../../Model/FindPscaler_v6'
+pscalername = '../../Model/FindPscaler_v7'
 p_scaler = joblib.load(pscalername)
 
 
@@ -29,7 +29,7 @@ def costFunction(y_pred, y):
     return (1/2/len(y))*cost
 
 #%% predict p value
-fname = '../../../code/EllipsoidTrain/test_file_p.csv'
+fname = '../../Data/test_file_p.csv'
 n_samples = 100
 print('Loading data ...\n')
 kx = []
